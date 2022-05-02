@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    home
+{% endblock %}
+    
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Symbol</th>
+                <th class="text-start">Name</th>
+                <th class="text-end">Shares</th>
+                <th class="text-end" style="text-align: right;">Price</th>
+                <th class="text-end">TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rows in shares %}
+                <tr>
+                    <td class="text-start">{{rows.symbol}}</td>
+                    <td class="text-start">{{rows.name}}</td>
+                    <td class="text-end">{{rows.shares_amount}}</td>
+                    <td class="text-end" style="text-align: right;">${{rows.price}}</td>
+                    <td class="text-end">${{rows.total_purchase}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th class="border-0 fw-bold text-end" colspan="4" style="text-align: right;">Cash</th>
+                <td class="border-0 text-end">{{cash}}</td>
+            </tr>
+            <tr>
+                <th class="border-0 fw-bold text-end" colspan="4" style="text-align: right;">TOTAL</th>
+                <td class="border-0 w-bold text-end">{{total}}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

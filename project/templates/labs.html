@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Doctors/Family
+{% endblock %}
+
+{% block nav1 %}
+    <ul class="navbar-nav mr-auto mt-2">
+        <li class="nav-item"><a href="/">Patients</a></li>
+        <li class="nav-item"><a href="/patient_overview">Patient Overview</a></li>
+        <li class="nav-item"><a href="/doctors_family">Doctors/Family</a></li>
+        <li class="nav-item"><a class="current-lk" href="/labs">Labs/Meds</a></li>
+        <li class="nav-item"><a href="/reportSheet">ReportSheet</a></li>
+    </ul>
+    <ul class="navbar-nav ml-auto mt-2">
+        <li class="nav-item"><a href="/logout">Log Out</a></li>
+    </ul>
+{% endblock %}
+
+{% block main %}
+    <header class="m-fonts" id="header-ext">
+        <!-- Patient name -->
+        <div class="p-name">
+            <lable>Patient:</lable>
+            {{DL['first_name']}} {{DL['last_name']}}
+        </div>
+        <!-- Retrieval date of lab information -->
+        <div class="p-date">
+            <lable>Last Updated:</lable>
+            {{DL['date']}}
+        </div>
+    </header>
+    <div>
+        <section class="m-fonts">
+            <!-- Labs -->
+            <div class="middle p-labs">
+                <div class="lb-c-3">LABS</div>
+                <div>
+                    <lable class="m-lable">Labs Done:</lable>
+                    {{DL['done']}}
+                </div>
+                <div>
+                    <lable class="m-lable">Lab Results:</lable>
+                    <div >
+                        <ul>
+                            {% for n in DL['results'] %}
+                                <li>{{n}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="lb-delim-l">
+                    <lable class="m-lable">Needed Labs:</lable>
+                    {{DL['needed']}}
+                </div>
+                <div class="lb-delim-r">
+                    <lable class="m-lable">Needed Labs Date:</lable>
+                    {{DL['n_date']}}
+                </div>
+                <div class="lb-delim-l">
+                    <lable class="m-lable">Future Lab:</lable>
+                    {{DL['future']}}
+                </div>
+                <div class="lb-delim-r">
+                    <lable class="m-lable">Future Lab Date:</lable>
+                    {{DL['f_date']}}
+                </div>
+            </div>
+            <!-- Medication -->
+            <div class="p_med">
+                <div class="lb-c-3">MEDICATION</div>
+                <div>
+                    <ul>
+                        {% for n in DL['p_meds'] %}
+                            <li>{{n}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

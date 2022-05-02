@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block nav2 %}
+    <ul class="navbar-nav ml-auto mt-2">
+        <li class="nav-item"><a class="current-lk" href="/register">Register</a></li>
+        <li class="nav-item"><a href="/login">Log In</a></li>
+    </ul>
+{% endblock %}
+
+{% block main %}
+    <div class="welcome-lg">
+        <h4>Create Your Account.</h4> 
+        <span>Have an account?<a href="/login">Sign in</a></span>
+    </div>
+    <form action="/register" method="post" id="form-lg">
+        <!-- First Name field -->
+        <div>
+            <div class="lable-div">
+                <lable >First Name</lable>
+            </div>
+            <div class="input-div">
+                <input autocomplete="off" autofocus name="f_name" type="text" aria-required="true"
+                    pattern="^([- \w\d\u00c0-\u024f]+)$" required="required"
+                    size="30" spellcheck="false">
+            </div>
+        </div>
+        <!-- Last Name field -->
+        <div>
+            <div class="lable-div">
+                <lable >Last Name</lable>
+            </div>
+            <div class="input-div">
+                <input autocomplete="off" name="l_name" type="text" aria-required="true"
+                    pattern="^([- \w\d\u00c0-\u024f]+)$" required="required"
+                    size="30" spellcheck="false">
+            </div>
+        </div>
+        <!-- Username field -->
+        <div>
+            <div class="lable-div">
+                <lable >Username <small>(Letters and numbers only)</small></lable>
+            </div>
+            <div class="input-div">
+                <input autocomplete="off" name="username" type="text" aria-required="true"
+                    pattern="^([- \w\d\u00c0-\u024f]+)$" required="required"
+                    size="30" spellcheck="false">
+            </div>
+        </div>
+        <!-- Password field -->
+        <div>
+            <div class="lable-div">
+                <lable >Password</lable>
+            </div>
+            <div class="input-div">
+                <input autocomplete="off" name="password" type="password" aria-required="true" 
+                    minlength="8" required="required">
+            </div>
+        </div>
+        <!-- Password Confirmation field -->
+        <div>
+            <div class="lable-div">
+                <lable >Confirm Password</lable>
+            </div>
+            <div class="input-div">
+                <input autocomplete="off" name="confirmation" type="password" aria-required="true" required="required">
+            </div>
+        </div>
+        <!--Error Message placeholder -->
+        <div class="lg-registr-div">
+            <p id='error'></p>
+        </div>
+        <!-- Submit button -->
+        <button class="btn btn-light" id="lg-btn" type="submit" onsubmit >Register</button>
+    </form>
+    <script>
+
+        /*
+         * Display input field Error message
+         */
+        function clear() {
+            // Set time duration for error message display
+            var tID = setTimeout(function () {
+                document.getElementById('error').innerHTML = "";
+                window.clearTimeout(tID);
+            }, 20000);
+        }
+
+        // Convert message from python format to json
+        var msg = JSON.parse('{{ message | tojson}}');
+        // If error message present display error to user
+        if (msg){
+            document.getElementById('error').innerHTML = msg;
+            // Clear error message
+            clear();
+        }
+
+    </script>
+{% endblock %}

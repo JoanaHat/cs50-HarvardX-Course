@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script> 
+        
+            var clicked = false;
+
+            function result() {
+                document.querySelector('#button_div').addEventListener('click', (event) => {
+                    
+                    answer = event.target;
+                    if (answer.innerText == 'Paris' && !clicked)
+                    {
+                        clicked = true;
+                        document.getElementById('reply').innerHTML = 'Correct!';
+                        answer.style.backgroundColor = 'lightgreen';
+                    }
+                    
+                    if (answer.innerText != 'Paris' && !clicked)
+                    {
+                        clicked = true;
+                        document.getElementById('reply').innerHTML = 'Inorrect';
+                        answer.style.backgroundColor = 'red';
+                    }
+                });
+                
+                
+                document.querySelector('.part2').addEventListener('click', (event) => {
+                    answer = document.getElementById('user_text').value;
+                    if (answer == 'Vetican')
+                    {
+                        document.getElementById('reply2').innerHTML = 'Correct!';
+                        document.getElementById('user_text').style.backgroundColor = 'lightgreen';
+                    }
+                    else
+                    {
+                        document.getElementById('reply2').innerHTML = 'Inorrect';
+                        document.getElementById('user_text').style.backgroundColor = 'red';
+                    }
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', result);
+        </script>
+    </head>
+    <body>
+
+        <div class="jumbotron">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- Multiple choice question -->
+                <h3>In which European city would you find Orly airport?</h3>
+                <p id='reply'></p>
+                <div id='button_div'>
+                    <button type="button">Versailles</button>
+                    <button type="button">Paris</button>
+                    <button type="button">Milan</button>
+                    <button type="button">Berlin</button>
+                    <button type="button">Lyon</button>
+                </div>
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- Free response question here -->
+                <h3>What is the smallest country in the world?</h3>
+                <p id='reply2'></p>
+                <input type="text" id="user_text">
+                <button type="submit" class="part2">Check Answer</button>
+            </div>
+
+        </div>
+    </body>
+</html>

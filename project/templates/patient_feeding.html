@@ -1,0 +1,46 @@
+<!-- Displays Patient Feeding information, bottom right of index.html -->
+{% block feed %}
+    <div class="patient_feeding">
+        <div class="lb-color-2">FEEDING</div>
+        <div class="lb-delim-l">
+            <lable class="m-lable">IV Site:</lable>
+            {{DF['iv_site']}}
+        </div>
+        <div class="lb-delim-r">
+            <lable class="m-lable">IV Change:</lable>
+            {{DF['iv_change']}}
+        </div>
+        <div class="lb-delim-l">
+            <lable class="m-lable">PICC Site:</lable>
+            {{DF['picc_site']}}
+        </div>
+        <div class="lb-delim-r">
+            <lable class="m-lable">PICC Change:</lable>
+            {{DF['picc_change']}}
+        </div>
+        <div class="lb-delim-l">
+            <lable class="m-lable">Tube Feed:</lable>
+            {{DF['tube_feed']}}
+        </div>
+        <div class="lb-delim-r">
+            <lable class="m-lable">Tube Formular & Rate:</lable>
+            {{DF['tf_form_rate']}}
+        </div>
+        <div class="lb-delim-l">
+            <lable class="m-lable">Diet:</lable>
+            {{DF['diet']}}
+        </div>
+        <div class="lb-delim-r">
+            <lable class="m-lable">Breakfast:</lable>
+            {{DF['breakfast']}}
+        </div>
+        <div class="lb-delim-l">
+            <lable class="m-lable">Lunch:</lable>
+            {{DF['lunch']}}
+        </div>
+        <div class="lb-delim-r">
+            <lable class="m-lable">Dinner:</lable>
+            {{DF['dinner']}}
+        </div>
+    </div>
+{% endblock %}

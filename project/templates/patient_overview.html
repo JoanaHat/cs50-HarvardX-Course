@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Patients Overview
+{% endblock %}
+
+{% block nav1 %}
+    <ul class="navbar-nav mr-auto mt-2">
+        <li class="nav-item"><a href="/">Patients</a></li>
+        <li class="nav-item"><a class="current-lk" href="/patient_overview">Patient Overview</a></li>
+        <li class="nav-item"><a href="/doctors_family">Doctors/Family</a></li>
+        <li class="nav-item"><a href="/labs">Labs/Meds</a></li>
+        <li class="nav-item"><a href="/reportSheet">ReportSheet</a></li>
+    </ul>
+    <ul class="navbar-nav ml-auto mt-2">
+        <li class="nav-item"><a href="/logout">Log Out</a></li>
+    </ul>
+{% endblock %}
+
+{% block main %}
+    <header class="m-fonts" id="header-ext">
+        <!-- Patient name -->
+        <div class="p-name">
+            <lable>Patient:</lable>
+            {{DO['first_name']}} {{DO['last_name']}}
+        </div>
+        <!-- Retrieval date of overview information -->
+        <div class="p-date">
+            <lable>Date:</lable>
+            {{DO['overview_date']}}
+        </div>
+    </header>
+    <!-- Patient overview information -->
+    <div class="p-overV">
+        <section class="middle m-fonts">
+            <div class="lb-delim-l">
+                <lable class="m-lable">Neuro:</lable>
+                {{DO['neuro_state']}}
+            </div>
+            <div class="lb-delim-r">
+                <lable class="m-lable">Pupils:</lable>
+                {{DO['pupils']}}
+            </div>
+            <div class="lb-delim-l">
+                <lable class="m-lable">Skin Condition:</lable>
+                {{DO['skin']}}
+            </div>
+            <div class="lb-delim-r">
+                <lable class="m-lable">Wound Care:</lable>
+                {{DO['wound_care']}}
+            </div>
+            <div class="lb-delim-l">
+                <lable class="m-lable">Wound Change:</lable>
+                {{DO['wound_change']}}
+            </div>
+            <div class="lb-delim-r">
+                <lable class="m-lable">Heart Sound:</lable>
+                {{DO['heart_sound']}}
+            </div>
+            <div class="lb-delim-l">
+                <lable class="m-lable">Heart Rhythm:</lable>
+                {{DO['heart_rhythm']}}
+            </div>
+            <div class="lb-delim-r">
+                <lable class="m-lable">Lung Sound:</lable>
+                {{DO['lung_sound']}}
+            </div>
+            <div class="lb-delim-l">
+                <lable class="m-lable">Bowel Sound:</lable>
+                {{DO['bowel_sound']}}
+            </div>
+            <div class="lb-delim-r">
+                <lable class="m-lable">Urinary:</lable>
+                {{DO['urinary']}}
+            </div>
+            <div class="lb-delim-l">
+                <lable class="m-lable">Last BM Date:</lable>
+                {{DO['last_bm']}}
+            </div>
+            <div class="lb-delim-r">
+                <lable class="m-lable">Secretion Description:</lable>
+                {{DO['secretion_d']}}
+            </div>
+        </section>
+    </div>
+    <!-- Patient Monitor Table -->
+    <footer id="footer-main">
+        <div class="lb-color">PATIENT MONITOR</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="m-lable" scope="col">Field</th>
+                    <th class="m-lable" scope="col">7:00 AM</th>
+                    <th class="m-lable" scope="col">12:00 PM</th>
+                    <th class="m-lable" scope="col">5:00 PM</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th class="m-lable" scope="row">Blood Sugar</th>
+                    {% for row in DM %}
+                        <td class="m-fonts">{{row.bs}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th class="m-lable" scope="row">Blood Pressure</th>
+                    {% for row in DM %}
+                        <td class="m-fonts">{{row.bp}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th class="m-lable" scope="row">Heart Rate</th>
+                    {% for row in DM %}
+                        <td class="m-fonts">{{row.hr}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th class="m-lable" scope="row">Temperature</th>
+                    {% for row in DM %}
+                        <td class="m-fonts">{{row.temp}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th class="m-lable" scope="row">O2 Saturation</th>
+                    {% for row in DM %}
+                        <td class="m-fonts">{{row.o_sat}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th class="m-lable" scope="row">Respiration Rate</th>
+                    {% for row in DM %}
+                        <td class="m-fonts">{{row.rr}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th class="m-lable" scope="row">Pain</th>
+                    {% for row in DM %}
+                        <td class="m-fonts">{{row.pain}}</td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </footer>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Doctors/Family
+{% endblock %}
+
+{% block nav1 %}
+    <ul class="navbar-nav mr-auto mt-2">
+        <li class="nav-item"><a href="/">Patients</a></li>
+        <li class="nav-item"><a href="/patient_overview">Patient Overview</a></li>
+        <li class="nav-item"><a class="current-lk" href="/doctors_family">Doctors/Family</a></li>
+        <li class="nav-item"><a href="/labs">Labs/Meds</a></li>
+        <li class="nav-item"><a href="/reportSheet">ReportSheet</a></li>
+    </ul>
+    <ul class="navbar-nav ml-auto mt-2">
+        <li class="nav-item"><a href="/logout">Log Out</a></li>
+    </ul>
+{% endblock %}
+
+{% block main %}
+    <header class="m-fonts" id="header-ext">
+        <!-- Patient name -->
+        <div class="p-name">
+            <lable>Patient:</lable>
+            {{DFD['first_name']}} {{DFD['last_name']}}
+        </div>
+        <!-- Retrieval date of doctor & family information -->
+        <div class="p-date">
+            <lable>Last Updated:</lable>
+            {{DFD['date']}}
+        </div>
+    </header>
+    <div class="p-doc-fam">
+        <section class="m-fonts">
+            <!-- Doctors -->
+            <div class="middle p-doctors">
+                <div class="lb-c-3">DOCTORS</div>
+                <div class="lb-delim-l">
+                    <lable class="m-lable">Receiving and Discharging MD:</lable>
+                    {{DFD['receiving_md']}}
+                </div>
+                <div class="lb-delim-r">
+                    <lable class="m-lable">MD Number:</lable>
+                    {{DFD['rmd_number']}}
+                </div>
+                <div class="lb-delim-l">
+                    <lable class="m-lable">Consultant Involved:</lable>
+                    {{DFD['consultants']}}
+                </div>
+                <div class="lb-delim-l">
+                    <lable class="m-lable">Consultant Groups:</lable>
+                    {{DFD['cnslt_groups']}}
+                </div>
+                <div class="lb-delim-r">
+                    <lable class="m-lable">Group Numbers:</lable>
+                    {{DFD['cnslt_number']}}
+                </div>
+            </div>
+            <!-- Family -->
+            <div class="p-family">
+                <div class="lb-c-3">PATIENT FAMILY</div>
+                <div class="lb-delim-l">
+                    <lable class="m-lable">Emergancy Contact Persons:</lable>
+                    {{DFD['p_emerg_contact']}}
+                </div>
+                <div class="lb-delim-r">
+                    <lable class="m-lable">Emergancy Numbers:</lable>
+                    {{DFD['pec_number']}}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

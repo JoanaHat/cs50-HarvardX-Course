@@ -1,0 +1,27 @@
+Greedy Algorithm: return the Least amount of change 
+
+1. Get positive change
+2. multiply change by 100
+
+3. If change is divisible by 25
+4.      count = change/25
+5.      if remainder of change/25 >= 10
+6.          count = count + remainder/10
+7.          if remainder/10 does not equal 0
+8.              if remainder/10 >= 5
+9.                  count  = count + remainder/5
+10.                 if remainder/5 does not equal to 0
+11.                     count = count + remainder
+12.                         print count
+13.     if remainder of change/25 >= 5
+14.         repeat number 9 to 12
+15.     if remainder of change/25 < 5
+16.         repeat number 11 to 12
+17. If change is divisible by 10
+18.     repeat numbers 9 to 12
+20. If change is divisible by 5
+21.     repeat number 9 to 12
+22. If change is < 5
+23.     print change
+
+

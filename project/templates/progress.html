@@ -1,0 +1,74 @@
+<!-- Periodic monitoring on patients, top right of index.html -->
+{% block progress %}
+    <div class="patient_medication" id="progress-g">
+        <!-- Headings -->
+        <div class="lb-color-2 w3-animate-fading">YOUR ATTENTION PLEASE!!</div>
+        <div id="monitor">
+            <h5>Please examine patient and fill out the {{mon_hour}} missing fields.</h5>
+        </div>
+        <form action="/progress/none" method="post">
+            <!-- Monitoring table -->
+            <div class="mon-table">
+                <table class="table table-bordered" id="mon-table">
+                    <thead>
+                        <tr>
+                            <th class="m-lable">Date_<br></th>
+                            <th class="m-lable">Time_<br></th>
+                            <th class="m-lable">Blood<br>Sugar</th>
+                            <th class="m-lable">Blood<br>Pressure</th>
+                            <th class="m-lable">Heart<br>Rate_</th>
+                            <th class="m-lable">Temp_</th>
+                            <th class="m-lable">O2_sat</th>
+                            <th class="m-lable">Resp<br>Rate_</th>
+                            <th class="m-lable">Pain<br>Intensity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Filled in fields -->
+                        <tr>
+                            {% for key, value in monitor.items() %}
+                                <td class="m-fonts">
+                                    {{value}}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        <!-- Empty fields -->
+                        <tr>
+                            <td class="m-fonts">
+                                {{date}}
+                            </td>
+                            <td class="m-fonts">
+                                {{mon_hour}}
+                            </td>
+                            {% for key, value in monitor.items() %}
+                                {% if key not in r2 %}
+                                    <td class="m-fonts" class="mon-missing-f">
+                                        {% if key == "o_sat" %}
+                                            <input autocomplete="off" class="form-control" name="{{key}}"
+                                            type="text" required="required" aria-required="true" pattern="(^([0-1-]?([0-9-]?){2}[%])$)">
+                                        {% elif key == "bp" or key == "pain" %}
+                                            <input autocomplete="off" class="form-control" name="{{key}}"
+                                            type="text" required="required" aria-required="true" pattern="(^(([0-9-]?){3}[/][0-9-]?[0-9-]{2})$)">
+                                        {% elif key == "temp" or key == "pain" %}
+                                            <input autocomplete="off" class="form-control" name="{{key}}"
+                                            type="text" required="required" aria-required="true" pattern="(^([0-9-][0-9-](\.[0-9][0-9]?)?)$)">
+                                        {% else %}
+                                            <input autocomplete="off" class="form-control" name="{{key}}"
+                                            type="text" required="required" aria-required="true" pattern="(^(([0-9-]?){3})$)">
+                                        {% endif %}
+                                    </td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                        <!-- Button -->
+                        <tr>
+                            <td colspan="9">
+                                <button class="btn btn-primary" id="lg-btn" type="submit">Submit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+{% endblock %}

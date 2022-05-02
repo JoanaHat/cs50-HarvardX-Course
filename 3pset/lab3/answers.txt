@@ -1,0 +1,25 @@
+sort1 uses: Bubble Sort
+
+How do you know?: 
+For both the random and reversed sorting it was the slowest.
+Additionally, it was evidently faster for the sorted arrays,
+this is consistent with the fact that it has a faster lower 
+bound of Ω(n).
+
+sort2 uses: Merge Sort
+
+How do you know?: 
+For all three (random, reversed and sorted arrays) sort2 perfomrmed 
+the fastest traversals. That is expected since both bubble and selection 
+sort have a O(n^2) while merge sort has a O(n log n), making the merge 
+algorithm the fastest of the three. In addition, for the sorted array 
+sort2 maintained the same speed as the random and reversed arrays, 
+that is because merge sort has a Θ(n log n).
+
+sort3 uses: Selection Sort 
+
+How do you know?: 
+Selection sort performs less swaps than bubble sort, because of this,
+it is faster than bubble sort. This was evident when comparing the speed 
+of sort1 and sort2. Moreover, selection sort has a Θ(n^2), this was observed 
+throughout all the sorting done by sort3.

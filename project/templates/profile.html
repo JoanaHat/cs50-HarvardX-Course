@@ -1,0 +1,38 @@
+<!-- Displays Patient Profile with Picture, left of index.html -->
+{% block profile %}
+    <div class="profile_data">
+        <div>
+            <lable class="m-lable">Name:</lable>
+            {{DP['first_name']}} {{DP['last_name']}}
+        </div>
+        <div>
+            <lable class="m-lable">DOB:</lable>
+            {{DP['dob']}}
+            <lable class="m-lable" id="gender">Sex:</lable>
+            {{DP['sex']}}
+        </div>
+        <div>
+            <lable class="m-lable">Code Status:</lable>
+            {{DP['code_status']}}
+        </div>
+        <div>
+            <lable class="m-lable">Diagnosis:</lable>
+            {{DP['diagnosis']}}
+        </div>
+        <div>
+            <lable class="m-lable">History:</lable>
+            {{DP['history']}}
+        </div>
+        <div>
+            <lable class="m-lable">Allergies:</lable>
+            {{DP['allergies']}}
+        </div>
+        <div>
+            <lable class="m-lable">Room:</lable>
+            {{DP['room']}}
+        </div>
+    </div>
+    <div class="profile_pic">
+        <img src={{pic}}  width="150" height="200">
+    </div>
+{% endblock %}

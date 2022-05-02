@@ -1,0 +1,27 @@
+Luhn's Algorithm
+
+1. Get positive long credit card number
+
+2. While credit card is not 0 
+3.      Get last digit of credit card
+4.      for every other digit starting with the second-to-last digit
+5.          multipy the digit by 2 
+6.          if the product is >= 10
+7.              add 1 to the variable even
+8.              add the remainder of the product/10 to even
+9.          else if the product is < 10, add the product to even
+10.     for every digit that does not satisfy point 4
+11.         add the digit to the variable odd
+
+12. Add the variable odd to even
+
+13. If the sum is divisible by 10 
+14.     If the 2nd digit is 1,2,3,4, or 5; the first digit is 5; and the lenght is 16
+15.         print MASTERCARD
+16.     If the 2nd digit is 4 or 7; the first digit is 3; and the length is 15
+17.         print AMEX
+18.     If the first digit 4; and the lenght is 13 or 16
+20.         print VISA
+21.     else print INVALID
+22. If the sum is not divisible by 10 print INVALID
+

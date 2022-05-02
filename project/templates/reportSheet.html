@@ -1,0 +1,399 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    ReportSheet
+{% endblock %}
+
+{% block nav1 %}
+    <ul class="navbar-nav mr-auto mt-2">
+        <li class="nav-item"><a href="/">Patients</a></li>
+        <li class="nav-item"><a href="/patient_overview">Patient Overview</a></li>
+        <li class="nav-item"><a href="/doctors_family">Doctors/Family</a></li>
+        <li class="nav-item"><a href="/labs">Labs/Meds</a></li>
+        <li class="nav-item"><a class="current-lk" href="/reportSheet">ReportSheet</a></li>
+    </ul>
+    <ul class="navbar-nav ml-auto mt-2">
+        <li class="nav-item"><a href="/logout">Log Out</a></li>
+    </ul>
+{% endblock %}
+
+{% block main %}
+    <header class="m-fonts" id="header-ext">
+        <!-- Patient name -->
+        <div class="p-name">
+            <lable>Patient:</lable>
+            {{name}}
+        </div>
+        <!-- Current Date -->
+        <div class="p-date">
+            <lable>Date:</lable>
+            {{date}}
+        </div>
+    </header>
+    <section class="rep-sheet m-fonts">
+        <!-- Heading -->
+        <div class="lb-color-2" id="heading1"></div>
+        <div class="lb-color">Please fill in all fields. It helps the next nurse, as you were helped!! Thanks!</div>
+        <button class="btn btn-primary resubmt-btn" id="rep_btn">RESUBMIT FORM</button>
+        <div class="rep-reminder">
+            <lable class="m-lable">REMINDER</lable>
+            <div class="rep-mind-d">
+                <ul>
+                    <li>IV Change Date: <b>{{patient['iv_change']}}</b></li>
+                    <li>PICC Change Date: <b>{{patient['picc_change']}}</b></li>
+                    <li>Tube Formular & Rate: <b>{{patient['tf_form_rate']}}</b></li>
+                    <li>Dsg Change Date: <b>{{patient['wound_change']}}</b></li>
+                    <li>Last BM: <b>{{patient['last_bm']}}</b></li>
+                </ul>
+            </div>
+        </div>
+        <!--Error Message placeholder -->
+        <p class="rep-error-mg" id='error'></p>
+        <form action="/reportSheet" method="post">
+            <!-- IV SITE -->
+            <div class="lb-delim-l">
+                <lable class="m-lable">IV Site:</lable>
+                <select class="form-select form-select-sm" name="iv_site" id="iv_site">
+                    <option value="None">None</option>
+                    <option value="R Arm">R Arm</option>
+                    <option value="L Arm">L Arm</option>
+                    <option value="Both Arm">Both Arm</option>
+                    <option value="R Wrist">R Wrist</option>
+                    <option value="L Wrist">L Wrist</option>
+                    <option value="Both Wrist">Both Wrist</option>
+                </select>
+            </div>
+            <div class="lb-delim-r">
+                <lable class="m-lable">IV Change Date:</lable>
+                <input autocomplete="off" class="form-control" placeholder="Select Date" name="iv_change" type="date" spellcheck="false">
+            </div>
+            <!-- PICC SITE -->
+            <div class="lb-delim-l">
+                <lable class="m-lable">PICC Site:</lable>
+                <select class="form-select form-select-sm" name="picc_site" id="picc_site">
+                    <option value="None">None</option>
+                    <option value="Left Brachial">Left Brachial</option>
+                </select>
+            </div>
+            <div class="lb-delim-r">
+                <lable class="m-lable">PICC Change Date:</lable>
+                <input autocomplete="off" class="form-control" placeholder="Select Date" name="picc_change" type="date" spellcheck="false">
+            </div>
+            <!-- TUBE FEED -->
+            <div class="lb-delim-l">
+                <lable class="m-lable">Tube Feed:</lable>
+                <select class="form-select form-select-sm" name="tube_feed" id="tube_feed">
+                    <option value="None">None</option>
+                    <option value="PEG">PEG</option>
+                    <option value="DOBHOFF">DOBHOFF</option>
+                </select>
+            </div>
+            <div class="lb-delim-r">
+                <lable class="m-lable">Tube Formular & Rate:</lable>
+                <input autocomplete="off" id="rep-frate" class="form-control" name="tf_form_rate" type="text" id="tf_form_rate"
+                    aria-required="true" pattern="(^([- \w\d\u00c0-\u024f\/\.\(\)\&\=\,]+)$)" required="required"
+                    spellcheck="false" placeholder="N/A(If None)">
+            </div>
+            <!-- DIET -->
+            <div class="lb-delim-l lb-delim-1">
+                <lable class="m-lable">Diet:</lable>
+                <select class="form-select form-select-sm" name="diet" id="diet">
+                    <option value="Normal">Normal</option>
+                    <option value="Low Sodium & high Protein">Low Sodium & high Protein</option>
+                    <option value="Low Carbs">Low Carbs</option>
+                    <option value="No Sodium">No Sodium</option>
+                    <option value="No Sugar">No Sugar</option>
+                    <option value="Purée">Purée</option>
+                    <option value="Liquids">Liquids</option>
+                </select>
+            </div>
+            <!-- BREAKFAST -->
+            <div class="lb-delim-l lb-delim-2 first-lb">
+                <lable class="m-lable">Breakfast:</lable>
+                <input autocomplete="off" placeholder="80%" class="form-control" name="breakfast"
+                    type="text" aria-required="true" pattern="(^([0-9-]+[%])$)"
+                    required="required" spellcheck="false">
+            </div>
+            <!-- LUNCH -->
+            <div class="lb-delim-l lb-delim-2">
+                <lable class="m-lable">Lunch:</lable>
+                <input autocomplete="off" placeholder="80%" class="form-control" name="lunch"
+                    type="text" aria-required="true" pattern="(^([0-9-]+[%])$)"
+                    required="required" spellcheck="false">
+            </div>
+            <!-- DINNER -->
+            <div class="lb-delim-l lb-delim-2">
+                <lable class="m-lable">Dinner:</lable>
+                <input autocomplete="off" placeholder="80%" class="form-control" name="dinner"
+                    type="text" aria-required="true" pattern="(^([0-9-]+[%])$)"
+                    required="required" spellcheck="false">
+            </div>
+            <!-- NEURO -->
+            <div class="lb-delim-l">
+                <lable class="m-lable">Neuro:</lable>
+                <select class="form-select form-select-sm" name="neuro_state" id="neuro_state">
+                    <option value="N/A">N/A</option>
+                    <option value="CONFUSED">CONFUSED</option>
+                    <option value="ORIENTED X3">ORIENTED X3</option>
+                    <option value="OBTUNDED">OBTUNDED</option>
+                </select>
+            </div>
+            <!-- PUPILS -->
+            <div class="lb-delim-r">
+                <lable class="m-lable">Pupils:</lable>
+                <select class="form-select form-select-sm" name='pupils' id='pupils'>
+                    <option value="PERLA">PERLA</option>
+                    <option value="DIALATED">DIALATED</option>
+                    <option value="Not Reactive To Light">Not Reactive To Light</option>
+                </select>
+            </div>
+            <!-- SKIN -->
+            <div class="lb-delim-l lb-delim-1">
+                <lable class="m-lable">Skin:</lable>
+                <select class="form-select form-select-sm" name="skin" id="skin">
+                    <option value="INTACT">INTACT</option>
+                    <option value="IMPAIRED">IMPAIRED</option>
+                </select>
+            </div>
+            <!-- WOUND CARE -->
+            <div class="lb-delim-l lb-delim-4">
+                <lable class="m-lable">Wound Care:</lable>
+                <select class="form-select form-select-sm" name="wound_care" id="wound_care">
+                    <option value="NO">NO</option>
+                    <option value="YES">YES</option>
+                </select>
+            </div>
+             <div class="lb-delim-l lb-delim-3">
+                <lable class="m-lable">Dsg Change Date:</lable>
+                <input autocomplete="off" class="form-control" placeholder="Select Date" name="wound_change"
+                    type="date" spellcheck="false">
+            </div>
+            <!-- HEART SOUND -->
+            <div class="lb-delim-l">
+                <lable class="m-lable">Heart Sound:</lable>
+                <select class="form-select form-select-sm" name="heart_sound" id="heart_sound">
+                    <option value="REGULAR">REGULAR</option>
+                    <option value="IRREGULAR">IRREGULAR</option>
+                    <option value="MUMUR">MUMUR</option>
+                    <option value="GALLOP">GALLOP</option>
+                </select>
+            </div>
+            <!-- HEART RHYTHM -->
+            <div class="lb-delim-r">
+                <lable class="m-lable">Heart Rhythm:</lable>
+                <select class="form-select form-select-sm" name="heart_rhythm" id="heart_rhythm">
+                    <option value="NSR">NSR</option>
+                    <option value="A-FIB">A-FIB</option>
+                    <option value="A-FLUTTER">A-FLUTTER</option>
+                    <option value="TACHYCARDIA">TACHYCARDIA</option>
+                    <option value="BRADYCARDIA">BRADYCARDIA</option>
+                </select>
+            </div>
+            <!-- LUNG SOUND -->
+            <div class="lb-delim-l">
+                <lable class="m-lable">Lung Sound:</lable>
+                <select class="form-select form-select-sm" name="lung_sound" id="lung_sound">
+                    <option value="CLEAR">CLEAR</option>
+                    <option value="DIMINISHED">DIMINISHED</option>
+                    <option value="COARSE">COARSE</option>
+                    <option value="CRACKLES">CRACKLES</option>
+                    <option value="WHEEZES">WHEEZES</option>
+                </select>
+            </div>
+            <!-- BOWEL SOUND -->
+            <div class="lb-delim-r">
+                <lable class="m-lable">Bowel Sound:</lable>
+                <select class="form-select form-select-sm" name="bowel_sound" id="bowel_sound">
+                    <option value="PRESENT">PRESENT</option>
+                    <option value="HYPERACTIVE">HYPERACTIVE</option>
+                    <option value="HYPOACTIVE">HYPOACTIVE</option>
+                    <option value="HIGH PITCHED">HIGH PITCHED</option>
+                </select>
+            </div>
+            <!-- URINARY -->
+            <div class="lb-delim-l">
+                <lable class="m-lable">Urinary:</lable>
+                <select class="form-select form-select-sm" name="urinary" id="urinary">
+                    <option value="CONTIENT">CONTIENT</option>
+                    <option value="INCONTIENT">INCONTIENT</option>
+                    <option value="FOLEY:URETHRA">FOLEY:URETHRA</option>
+                </select>
+            </div>
+            <!-- LAST BM -->
+            <div class="lb-delim-r">
+                <lable class="m-lable">Last BM:</lable>
+                <input autocomplete="off" class="form-control" placeholder="Select Date" name="last_bm"
+                    type="datetime-local" spellcheck="false">
+            </div>
+            <!-- SECRETION DESCRIPTION -->
+            <div class="rep-sec">
+                <lable class="m-lable">Secretion Description:</lable>
+                <input autocomplete="off" class="form-control" name="secretion_d"
+                    type="text" aria-required="true" pattern="(^([- \w\d\u00c0-\u024f\.\'\!\&\,\-]+)$)"
+                    required="required" spellcheck="false" placeholder="N/A(If None)">
+            </div>
+            <!-- BUTTON -->
+            <div>
+                <button class="btn btn-primary" id="lg-btn" type="submit">Submit</button>
+            </div>
+        </form>
+        <script>
+        
+            /*
+             * Add event listener for buttons
+             */
+            const resubmit_btn = document.getElementById("rep_btn");
+            resubmit_btn.addEventListener("click", reactiv_Form, false);
+
+            const send_form_btn = document.getElementById("lg-btn");
+            send_form_btn.addEventListener("click", addPatient, false);
+            
+            
+            /*
+             * Convert from python format to json
+             */
+            let p_name = JSON.parse('{{ name | tojson}}'); // Active patient name
+            let msg = JSON.parse('{{ message | tojson}}'); // Error message
+            // "1" if form was successfully submitted else "0"
+            let submitted = JSON.parse('{{ submitted | tojson}}');
+
+            // Array of patient names whose report sheet were submitted
+            let patient_done = localStorage.getItem("rep_form_submitted")? JSON.parse(localStorage.getItem("rep_form_submitted")): [];
+            // Name of last patient whose form was submitted
+            let patientSub = localStorage.getItem("rep_patient")? localStorage.getItem("rep_patient"): "";
+            let heading1 = document.getElementById('heading1');
+
+            // Get desired select tags
+            let rSheet = [
+                "#iv_site", "#picc_site", "#tube_feed", "#diet", "#neuro_state",
+                "#pupils", "#skin", "#wound_care","#heart_sound", "#heart_rhythm",
+                "#lung_sound", "#bowel_sound", "#urinary"
+            ];
+            
+
+            /*
+             * Prefill select tag's value according to patient's last db entry
+             * Deactivate form once user has submitted Report Sheet
+             */
+            window.onload = function() {
+
+                // Array of values corresponding to select tags in rSheet
+                var val = JSON.parse('{{ feed | tojson}}');
+                // Reset fields
+                heading1.textContent = "END OF SHIFT REPORT";
+                resubmit_btn.style.display = 'none';
+                disableForm(false);
+                
+                // Get all select tags and change their value
+                for (let i = 0; i < rSheet.length; i++) {
+                    // Get tag
+                    var rselectors = document.querySelector(rSheet[i]);
+                    // Change tag value
+                    rselectors.value = val[i];
+                }
+
+                // Check if form was submitted
+                if (submitted & patient_done.indexOf(patientSub) == -1) {
+                    // If patient name not in array add name
+                    patient_done.push(patientSub);
+                    localStorage.setItem("rep_form_submitted", JSON.stringify(patient_done));
+                }
+
+                //If form was submitted Diactivate form
+                if (patient_done.indexOf(p_name) != -1) {
+                    heading1.textContent = "END OF SHIFT REPORT -- SUBMITTED";
+                    disableForm(true);
+                    resubmit_btn.style.display = 'inline';
+                }
+            };
+
+
+            /*
+             * Deactivate a patient's report sheet form after it has been submitted
+             */
+            function disableForm(bool) {
+                // Disable input elements
+                var inputs = document.getElementsByTagName("input");
+                disableField(bool, inputs);
+                // Disable select elements
+                var selects = document.getElementsByTagName("select");
+                disableField(bool, selects);
+                // Disable button
+                var buttons = document.getElementById("lg-btn");
+                buttons.disabled = bool;
+            }
+            
+            
+            /*
+             * Deactivate or activate every element of a given type
+             * according to given boolean
+             */
+            function disableField(bool, f_field) {
+                for (var i = 0; i < f_field.length; i++) {
+                    f_field[i].disabled = bool;
+                }
+            }
+            
+            
+            /*
+             * Add patient name to local storage
+             */
+            function addPatient() {
+                localStorage.setItem("rep_patient", p_name);
+            }
+
+
+            /*
+             * Reactivate Deactivated form
+             */
+            function reactiv_Form() {
+                heading1.textContent = "END OF SHIFT REPORT";
+                disableForm(false);
+                resubmit_btn.style.display = 'none';
+            }
+
+
+            /*
+             * flatpickr API for calender datepicker
+             * Displays datepicker in all browsers
+             */
+            date_config = {
+                // Configuration for input type date
+                altInput: true,
+                altFormat: "F j, Y",
+                dateFormat: "Y-m-d"
+            };
+
+            datetime_config = {
+                // Configuration for input type datetime
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+                altInput: true,
+                altFormat: "F j, Y (h:S K)"
+            };
+            // Calling flatpickr object
+            flatpickr("input[type=date]", date_config);
+            flatpickr("input[type=datetime-local]", datetime_config);
+
+
+            /*
+             * Display input field Error message
+             */
+            function clear() {
+                // Set time duration for error message display
+                var tID = setTimeout(function () {
+                    document.getElementById('error').innerHTML = "";
+                    window.clearTimeout(tID);
+                }, 20000);
+            }
+
+            // If error message present display error to user
+            if (msg) {
+                document.getElementById('error').innerHTML = msg;
+                // Clear error message
+                clear();
+            }
+
+        </script>
+    </section>
+{% endblock %}

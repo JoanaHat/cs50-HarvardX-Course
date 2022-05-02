@@ -1,0 +1,23 @@
+Creating a right-aligned pyramid next to a left-aligned pyramid, seperated by space
+
+1. Get height of pyramid from user
+2.      reprompt user until height is between 1 and 8, inclusive
+
+3. Create a function that prints a given number of space 
+4.      for n times
+5.          print n spaces
+
+6. Create a function that prints right-aligned rows
+7.      for each row n where i = to number of # to print
+8.          print (pyramid height - i) spaces 
+9.          then print #, i times
+
+10. Create a function that prints right-aligned rows
+11.      for each row n where i = to number of # to print
+12.         print #, i times
+
+13. In the main function after getting the pyramid height 
+14.     for each pyramid row (basically nested loops)
+15.         call right-aligned function
+16.         call space function
+17.         call left-aligned function

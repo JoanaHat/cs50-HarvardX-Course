@@ -1,0 +1,960 @@
+/* Brand */
+nav .navbar-brand {
+    font-size: xx-large;
+    padding-right: 60px;
+}
+
+nav .navbar-brand .yellow {
+    color: #f5b82e;
+}
+
+nav .navbar-brand .green {
+    color: #2e944b;
+}
+
+/* Navbar button */
+#nav-button:hover {
+    background-color: #EAFCE6;
+    opacity: 0.6;
+}
+
+/* Navbar links */
+nav .navbar-nav li a{
+    padding: 0px 10px;
+    font-weight: 400;
+    font-size: 18px;
+    color: #7D8A74;
+    text-decoration: none;
+}
+
+nav .navbar-nav li a:hover{
+    color: #3C5C25;
+    font-size: 20px;
+    transition: color 2s ease-in-out, color 0.15s ease-in-out;
+}
+
+nav .navbar-nav .current-lk {
+    color: #3C5C25;
+    font-size: 20px;
+}
+
+/* Main */
+main .form-control {
+    /* Center form controls */
+    display: inline-block;
+    /* Override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+main {
+    /* Scroll horizontally as needed */
+    overflow-x: auto;
+    /* Center contents */
+    text-align: center;
+}
+main img {
+    /* Constrain images on small screens */
+    max-width: 100%;
+}
+
+/* html tags */
+p {
+    color: #3C5C25;
+}
+
+select {
+    padding: 6px 10px;
+    border-radius: 0.25em;
+    border-color: #A3B099;
+}
+
+/* Remove Blue outline */
+select:focus,select:active, button:focus, button:active, input, input:focus, input:active {
+    outline: none !important;
+    box-shadow: none;
+}
+
+/* Header tag */
+header-message {
+    background-color: #8B4;
+    padding: 30px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    text-align: center;
+    color: white;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 30px 0px;
+    background-color: #8B4;
+    margin: 6px 0px;
+    text-align: center;
+    color: white;
+}
+
+.header-hding h3{
+    font-weight: 600;
+    font-size: 22px;
+}
+
+.header-hding-l, .header-hding-r {
+    display: block;
+    float: left;
+    width: 50%;
+    color: #FFFFFF;
+    margin: 0px 20px;
+    text-align: left;
+}
+
+.header-hding-r {
+    text-align: right;
+}
+
+.p-name {
+    font-size: 30px;
+}
+
+.p-date {
+    font-size: 18px;
+}
+
+#header-ext {
+    display: block;
+    color: #FFFFFF;
+    line-height: 1.5;
+}
+
+#myHeader {
+    z-index: 9999;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky + .content {
+    padding-top: 102px;
+}
+
+/* Login and Register Top Headings*/
+.welcome-lg {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    margin-top: 50px;
+    font-size: 16px;
+    font-family: Helvetica,Arial,sans-serif;
+    font-weight: 300;
+    color: #3C5C25;
+}
+
+.welcome-lg span{
+    padding-left: 4px;
+}
+
+.welcome-lg a{
+    padding: 0px 2px;
+    font-weight: 400;
+}
+
+#monitor {
+    font-size: 16px;
+    font-family: Helvetica,Arial,sans-serif;
+    font-weight: 300;
+    color: #3C5C25;
+    margin-left: -20px;
+    margin-top: -20px;
+}
+
+/* Forms */
+#form-lg {
+    padding-top: 20px;
+    margin: 0px 412px;
+    font-family: Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #3C5C25;
+    line-height: 24px;
+}
+
+.rep-sheet form {
+    background-color: #f1f1f1;
+    padding: 0px 40px;
+    padding-bottom: 40px;
+}
+
+/* Main Fonts  */
+.m-fonts, .lb-color, .lb-color-2{
+    font-family: Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #203312;
+    line-height: 24px;
+}
+
+/* lables */
+.lable-div {
+    display: block;
+    text-align: left;
+    font-weight: 500;
+    padding: 4px 0px;
+}
+
+.lb-color, .lb-color-2, .lb-c-3 {
+    /*orange*/
+    font-weight: 700;
+    font-size: 18px;
+    color: #A50;
+}
+
+.patient_medication .lb-color {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.m-lable {
+    font-weight: 600;
+    padding-right: 4px;
+    font-size: 17px;
+}
+
+.lb-color-2 {
+    padding-bottom: 40px;
+    font-size: 30px;
+}
+
+.lb-c-3 {
+    font-size: 20px;
+    padding-bottom: 6px;
+}
+
+.lb-delim-l {
+    display: block;
+    float: left;
+    width: 40%;
+}
+
+.lb-delim-r {
+    display: block;
+    float: right;
+    width: 60%;
+}
+
+/* Input fields */
+.input-div{
+    display: block;
+    padding-bottom: 16px;
+}
+
+.input-div input, .input-div input:focus, input[type=text]:focus, input[type=text] {
+    width: 100%;
+    background-color: #F0FAF0;
+    padding: 6px 10px;
+    border: 1px solid #C7D1C7;
+    border-radius: 4px;
+    font-weight: 300;
+    font-size: 15px;
+}
+
+.input-div input:focus, input[type=text]:focus{
+    background-color: #FFF;
+    outline-color: #B1F0B1;
+    box-shadow: inset 0 0 4px #8AFF8A;
+}
+
+input[aria-invalid="true"], textarea[aria-invalid="true"] {
+    border: 1px solid #f00;
+    box-shadow: 0 0 4px 0 #f00;
+}
+
+/* Profile */
+/* Create two columns that floats next to each other (Index) */
+.patient_profile {
+    float: left;
+    width: 30%;
+    height: 0px;
+    background: #fff;
+    margin-top: 30px;
+    margin-bottom: 100%;
+}
+
+.patient_profile:nth-of-type(1) {
+    text-align: left;
+}
+
+#profile_aj {
+    line-height: 2.5;
+}
+
+.profile_data #gender{
+    padding-left: 15px;
+}
+
+.profile_pic {
+    margin-top: 15px;
+}
+
+/* Meds & Feeding */
+.patient_medication, .patient_feeding {
+    width: 70%;
+    float: left;
+    padding: 30px 40px;
+    margin-top: 30px;
+    background-color: #f1f1f1;
+    text-align: left;
+    line-height: 1;
+}
+
+.patient_feeding {
+    line-height: 2;
+}
+
+/* Medication Due Alert */
+.m_alert {
+    display: flex;
+    float: left;
+    margin-bottom: -15px;
+}
+
+#med_alert {
+    color: #FF0000;
+    margin-top: 10px;
+    margin-bottom: -20px;
+    padding: 0px 15px;
+    background-color: #f1f1f1;
+    text-shadow: 2px 2px 4px #FFBDBD;
+    text-align: center;
+}
+
+.med_alert_button {
+    background-color: #FF0000;
+    border: 1px solid #AB2222;
+    border-radius: 2px;
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.med_alert_button:hover{
+    background-color: #AB2222;
+}
+
+.w3-animate-fading {
+    animation: fading 4s infinite
+}
+
+@keyframes fading {
+    0%{opacity:0}
+    50%{opacity:1}
+    100%{opacity:0}
+}
+
+/* Progress */
+#progress-g {
+  overflow-x: auto;
+  
+}
+
+#mon-table {
+    margin-left: -20px;
+}
+
+.mon-missing-f {
+    margin: -2px;
+}
+
+/* Patient Overview */
+.p-overV {
+    padding-left: 40px;
+}
+
+/* Family & Doctors */
+.p-doc-fam .lb-delim-l, .p-doc-fam .lb-delim-r, .p-labs .lb-delim-l, .p-labs .lb-delim-r {
+    width: 50%;
+}
+
+.p-family, .p_med {
+    text-align: left;
+}
+
+.p-family .lb-color {
+    padding-bottom: 6px;
+}
+
+/* Labs */
+.p-labs .lb-c-3, .p-doctors .lb-c-3 {
+    margin-bottom: -12px;
+}
+
+/* Report Sheet */
+.rep-sheet {
+    line-height: 5;
+    text-align: left;
+    padding: 40px 0;
+}
+
+.rep-sheet .lb-color-2 {
+    padding: 0px 20px;
+    padding-bottom: 0px;
+    line-height: 1.5;
+    color: #3C5C25;
+}
+
+.rep-sheet .lb-color {
+    padding: 0px 20px;
+    padding-bottom: 40px;
+    line-height: 1.5;
+}
+
+.rep-reminder {
+    line-height: 1.5;
+    padding-bottom: 40px;
+    margin-top: -20px;
+}
+
+.rep-reminder lable {
+    padding-left: 20px; font-size: 20px;
+}
+
+.rep-mind-d {
+     padding-left: 20px;
+}
+
+.rep-sheet input, .rep-sheet input:focus {
+    width: 45%;
+}
+
+.rep-error-mg {
+    padding: 0px 20px;
+    margin-top: -20px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.rep-sec {
+    width: 100%;
+    line-height: 1.5;
+    margin: 20px 0px;
+}
+
+.rep-sec input, .rep-sec input:focus {
+    width: 100%;
+    display: block;
+}
+
+.lb-delim-1{
+    width: 40%;
+}
+
+.lb-delim-2 {
+    width: 19%;
+}
+
+.first-lb {
+    width: 22%;
+}
+
+.first-lb input, .first-lb input:focus {
+    width: 38.84%;
+}
+
+.lb-delim-3 {
+    width: 30%;
+}
+
+.lb-delim-4 {
+    width: 30%;
+}
+
+/* Clear floats after columns */
+.middle {
+    line-height: 2;
+    text-align: left;
+    padding: 20px 0;
+}
+
+.middle::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Register link on login page */
+.lg-registr-div{
+    margin-top: 12px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.lg-registr-div span, #error{
+    font-weight: 300;
+}
+
+/* Login and Register fields error message */
+#error {
+    color: #FF0000;
+    animation: fadein 2s;
+}
+
+/* Display plaintext password checkbox */
+.display-pw {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    color: #3B5EF7;
+}
+
+/* Buttons */
+#lg-btn, .resubmt-btn {
+    background-color: #2e944b;
+    width:100%;
+    font-weight: 600;
+    font-size: 20px;
+    color: #FFF;
+    border: none;
+}
+
+.resubmt-btn {
+    width:25%;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0px 20px;
+    margin-bottom: 20px;
+    margin-top: -60px;
+}
+
+#lg-btn:hover, .resubmt-btn:hover {
+    background-color: #2BAD4F;
+    border: 1px solid #2DA14D;
+}
+
+/* Footer */
+#footer-main {
+    padding-top: 20px;
+    text-align: left;
+    color: #000;
+    background-color: transparent;
+}
+
+#footer-main .lb-color {
+    padding-bottom: 6px;
+}
+
+
+/*
+ * * * Responsive layouts * * *
+ */
+@media (max-width: 1200px) {
+    /* brand */
+    nav .navbar-brand {
+      font-size: x-large;
+      padding-right: 60px;
+    }
+
+    /* Navbar links */
+    nav .navbar-nav li a{
+      padding: 0px 10px;
+      font-size: 16px;
+    }
+    nav .navbar-nav li a:hover{
+      font-size: 18px;
+    }
+    nav .navbar-nav .current-lk {
+      font-size: 18px;
+    }
+
+    /* Forms */
+    #form-lg {
+      margin: 0px 200px;
+    }
+    .rep-sheet form {
+      padding: 0px 25px;
+      padding-bottom: 20px;
+    }
+
+    /* Patient Overview */
+    .p-overV {
+      padding-left: 0px;
+    }
+    .p-overV .lb-delim-l, .p-overV .lb-delim-r {
+      width: 50%
+    }
+
+    /* Patient Photo Profile */
+    .patient_profile {
+      margin-top: 40px;
+      margin-left: 100px;
+      float: none;
+      margin-bottom: 0px;
+      width: 100%;
+      height: 100%;
+    }
+    .profile_data {
+      margin-top: 10px;
+      width: 65%;
+      float: right;
+    }
+    .profile_pic {
+      float: left;
+      margin-top: 10px;
+      width: 35%;
+    }
+    .profile_pic img{
+      width: 250px;
+      height: 300px;
+      margin-bottom: 40px;
+    }
+
+    /* Patient Main Page */
+    .patient_medication, .patient_feeding {
+      width: 100%;
+      height: auto;
+    }
+    .patient_medication {
+      margin-top: 20px;
+    }
+
+     /* Lable Delimiters */
+    .lb-delim-l {
+      width: 38%;
+    }
+    .lb-delim-r {
+      width: 62%;
+    }
+    .lb-color-2 {
+      font-size: 28px;
+    }
+
+    /* Report sheet */
+    .rep-sheet .m-lable {
+        font-size: 15px;
+    }
+    .rep-sheet .lb-delim-l, .rep-sheet .lb-delim-r {
+        width: 50%;
+    }
+    .lb-delim-1 {
+        width: 100% !important;
+    }
+    .lb-delim-2 {
+        width: 31% !important;
+    }
+    .first-lb  {
+        width: 38% !important;
+    }
+    .first-lb input, .first-lb input:focus {
+        width: 36.71%;
+    }
+    .rep-sec, .rep-sec input {
+        width: 100%;
+    }
+
+    /* Medication Due Alert */
+    .m_alert {
+      margin-bottom: 10px;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    /* Navbar links */
+    nav .navbar-nav li a{
+      padding: 0px 8px;
+    }
+
+    /* Family & Doctors */
+    .p-doc-fam .lb-delim-l, .p-doc-fam .lb-delim-r {
+      width: 100%;
+    }
+
+    /* Report Sheet*/
+    .rep-reminder {
+      padding-bottom: 25px;
+    }
+}
+
+
+@media (max-width: 900px) {
+    /* brand */
+    nav .navbar-brand {
+      padding-right: 4px;
+    }
+
+    /* Navbar links */
+    nav .navbar-nav li a{
+      padding: 0px 6px;
+      font-size: 15px;
+    }
+    nav .navbar-nav li a:hover{
+      font-size: 17px;
+    }
+    nav .navbar-nav .current-lk {
+      font-size: 17px;
+    }
+
+    /* Patient Overview */
+    .p-overV .lb-delim-l {
+      width: 45%;
+    }
+    .p-overV .lb-delim-r {
+      width: 55%;
+    }
+
+    /* Patient Photo Profile */
+    .profile_data {
+      width: 60%;
+    }
+    .profile_pic {
+      width: 40%;
+    }
+}
+
+
+@media (max-width: 800px) {
+    /* Forms */
+    #form-lg {
+      margin: 0px 120px;
+    }
+    .rep-sheet form {
+      padding-left: 20;
+    }
+
+    /* header headings */
+    .header-hding h3 {
+      font-weight: 600;
+      font-size: 20px;
+    }
+    .header-hding h5{
+      font-size: 18px;
+    }
+
+    /* Font */
+    .m-fonts{
+      font-size: 14px;
+    }
+    .m-lable {
+       font-size: 16px;
+    }
+
+    /* Patient Photo Profile */
+    .profile_data {
+      width: 65%;
+      padding-left: 10px;
+    }
+    .profile_pic {
+      width: 35%;
+    }
+    #profile_aj {
+      line-height: 2;
+    }
+    .profile_pic img{
+      width: 200px;
+      height: 250px;
+    }
+    .patient_profile {
+      margin-left: 10px;
+    }
+
+    /* Lable Delimiters */
+    .patient_feeding .lb-delim-l, .patient_feeding .lb-delim-r {
+      float: none;
+      width: 100%;
+    }
+    .lb-color-2 {
+      font-size: 26px;
+      padding-bottom: 30px;
+    }
+
+    /* button */
+    .resubmt-btn {
+      width: 30%;
+      font-size: 16px;
+    }
+    #mon-table button {
+      width: 50%;
+    }
+}
+
+
+@media (max-width: 700px) {
+    /* Patient Overview */
+    .p-overV .lb-delim-l, .p-overV .lb-delim-r {
+      width: 100%;
+      float: left;
+    }
+    .p-labs .lb-delim-l, .p-labs .lb-delim-r {
+      width: 100%;
+    }
+
+    /* Report Sheet */
+    .rep-sheet .lb-delim-l, .rep-sheet .lb-delim-r {
+        width: 100%;
+    }
+    .rep-sheet {
+        line-height: 4;
+    }
+    .lb-delim-2 input, .lb-delim-2 input:focus {
+        width: 45%;
+    }
+    .first-lb input, .first-lb input:focus {
+        width: 36.71%;
+    }
+
+    /* button */
+    .resubmt-btn {
+      width: 35%;
+    }
+}
+
+
+@media (max-width: 600px) {
+    /* Forms */
+    #form-lg {
+      margin: 0px 0px;
+      text-align: left;
+    }
+
+    /* header headings */
+    header {
+      display: block;
+    }
+    .header-hding-l, .header-hding-r {
+      float: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    /* Patient Photo Profile */
+    .profile_data {
+      width: 100%;
+    }
+    .profile_pic {
+      margin-top: 8px;
+      width: 100%;
+    }
+
+    /* button */
+    .resubmt-btn {
+      width: 40%;
+    }
+
+    /* Medication Due Alert */
+    .m_alert {
+      margin-bottom: 0px;
+    }
+}
+
+
+@media (max-width: 450px) {
+    /* Forms */
+    #form-lg {
+      padding-top: 30px;
+    }
+
+    /* Footer */
+    #footer-main .m-lable {
+      font-size: 14px;
+    }
+
+    /* Report sheet */
+    .rep-sheet .m-lable {
+        font-size: 12px;
+    }
+    .rep-sheet .m-fonts {
+        font-size: 10px;
+    }
+    .rep-sheet input, .rep-sheet input:focus {
+        width: 55%;
+    }
+    .lb-delim-2 {
+        width: 100% !important;
+    }
+    .lb-delim-2 input, .lb-delim-2 input:focus {
+        width: 40%;
+    }
+    .rep-sec input, .rep-sec input:focus {
+        width: 100%;
+    }
+
+    /* Progress */
+    #monitor {
+      padding: 20px 0px;
+      padding-left: 20px;
+    }
+    .mon-table {
+      padding-left: 20px;
+    }
+
+    /* button */
+    .resubmt-btn {
+      width: 80%;
+    }
+    #mon-table button {
+      width: 33%;
+    }
+}
+
+@media (max-width: 400px) {
+    /* Login and Register Top Headings*/
+    .welcome-lg {
+      display: block;
+      font-size: 12px;
+    }
+
+    /* Patient Main Page */
+    .patient_medication, .patient_feeding {
+      padding: 20px 15px;
+    }
+
+     /* Lable Delimiters */
+    .patient_feeding .lb-delim-l, .patient_feeding .lb-delim-r {
+      padding-left: 10px;
+    }
+    .lb-color-2 {
+      padding-bottom: 20px;
+      font-size: 24px;
+    }
+    .patient_medication .lb-color {
+      font-size: 20px;
+    }
+
+    /* Report Sheet */
+    #rep-frate {
+        width: 100%;
+    }
+}
+
+@media (max-width: 320px) {
+    /* Lable Delimiters */
+    .lb-color-2 {
+      padding-bottom: 18px;
+      font-size: 20px;
+    }
+
+     /* Font */
+    .m-fonts{
+      font-size: 13px;
+    }
+
+    /* Report Sheet */
+    .rep-sheet input, .rep-sheet input:focus {
+        width: 80%;
+    }
+    .lb-delim-2 input, .lb-delim-2 input:focus {
+        width: 40%;
+    }
+    .rep-sec input, #rep-frate, .rep-sec input:focus {
+        width: 100%;
+    }
+
+    /* Medication Due Alert */
+    .m_alert {
+      margin-bottom: 8px;
+    }
+}

@@ -1,0 +1,361 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Patients
+{% endblock %}
+
+{% block nav1 %}
+    <ul class="navbar-nav mr-auto mt-2">
+        <li class="nav-item"><a class="current-lk" href="/">Patients</a></li>
+        <li class="nav-item"><a href="/patient_overview">Patient Overview</a></li>
+        <li class="nav-item"><a href="/doctors_family">Doctors/Family</a></li>
+        <li class="nav-item"><a href="/labs">Labs/Meds</a></li>
+        <li class="nav-item"><a href="/reportSheet">ReportSheet</a></li>
+    </ul>
+    <ul class="navbar-nav ml-auto mt-2">
+        <li class="nav-item"><a href="/logout">Log Out</a></li>
+    </ul>
+{% endblock %}
+
+{% block main %}
+    <header class="m-fonts header-hding">
+         <!-- Name & Date -->
+        <div class="header-hding-l">
+            <h3 class="lb-color">NURSE: {{nurse_info[0]['name']}}</h3>
+            <h5>DATE: {{date}}</h5>
+        </div>
+        <!-- Shift & Timer -->
+        <div class="header-hding-r">
+            <h3 class="lb-color">SHIFT: {{nurse_info[0]['shift_start']}} - {{nurse_info[0]['shift_end']}}</h3>
+            <h5 id="timer"></h5>
+        </div>
+    </header>
+    <section class="m-fonts">
+        <!-- Patient Picture Profile -->
+        <div class="patient_profile">
+            <div>
+                <lable class="lable-div lb-color"><b>SELECT PATIENT:</b></lable>
+                <select id="profile" class="m-fonts" onchange="new_patient(this.value); mHours(this.value); patient_feeding(this.value); patient_medication(this.value);">
+                {% for row in patients %}
+                    <option value="{{row.first_name}} {{row.last_name}}">{{row.first_name}} {{row.last_name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <!-- Patient Profile -->
+            <div id="profile_aj">
+                {% block profile %}{% endblock %}
+            </div>
+        </div>
+        <!-- Patient due medication alert -->
+        <div class="m_alert" >
+            <div id="md_alert"><h4 class="w3-animate-fading" id="med_alert"></h4></div>
+            <button class="med_alert_button" onclick="clearAlert()" id="alert_btn">GOT IT!</button>
+        </div>
+        <!-- Patient Progress -->
+        <div id="progress">
+            {% block progress %}{% endblock %}
+        </div>
+        <!-- Patient Medication hours -->
+        <div id="patient_medication">
+            {% block medi %}{% endblock %}
+        </div>
+        <!-- Patient Feeding information -->
+        <div id="patient_feeding">
+            {% block feed %}{% endblock %}
+        </div>
+    </section>
+    <script>
+
+        /*
+         * Synchronizes all HTTP GET Requests to get information of one patient
+         */
+        window.onload = async function() {
+            var name = await JSON.parse('{{ p_name | tojson}}');
+            new_patient(name);
+            patient_medication(name);
+            patient_feeding(name);
+        };
+
+
+        /*
+         * Periodic monitoring on patients
+         * Requires users to fill in required fields in form for a given hour
+         */
+        let p = document.getElementById('progress');
+        // Array of patient names who have been monitored
+        let p_monitored = localStorage.getItem("pat_monitored")? JSON.parse(localStorage.getItem("pat_monitored")): [];
+        // Number of submitted forms
+        let monitor_tracker = localStorage.getItem("m_tracker")? JSON.parse(localStorage.getItem("m_tracker")): 0;
+
+        async function monitorP(name) {
+            // Number of submitted forms
+            var tracker = JSON.parse('{{ tracker | tojson}}');
+            // Current hour
+            var now = new Date();
+            var hr = now.getHours();
+
+            // Selected hours for monitoring patients
+            if (hr == 7 || hr == 17 || hr == 18) {
+                // Clear local storage for past hour
+                if (p_monitored.indexOf(hr) == -1) {
+                    p_monitored.splice(0, p_monitored.length);
+                    localStorage.setItem("pat_monitored", JSON.stringify(p_monitored));
+                    // Add new hour to local storage
+                    p_monitored.push(hr);
+                }
+                // If patient's form is not submitted display form
+                if (p_monitored.indexOf(name) == -1){
+                    // If form submitted, add patient's name to local storage
+                    if (tracker) {
+                        if (monitor_tracker != tracker) {
+                            p_monitored.push(name);
+                            // remove form
+                            p.textContent = '';
+                            monitor_tracker++;
+                        }else{
+                            // If form not submitted, display form
+                            progress(name);
+                        }
+                    } else {
+                        // If form not submitted, display form
+                        progress(name);
+                    }
+                    localStorage.setItem("pat_monitored", JSON.stringify(p_monitored));
+                } else {
+                    // If form submitted and user in local storage, remove form
+                    p.textContent = '';
+                }
+                localStorage.setItem("m_tracker", tracker);
+            }
+
+            console.log(p_monitored);
+        }
+
+
+        /*
+         * Alert User when patient medication is due
+         */
+        let btn = document.getElementById('alert_btn');
+        let med_alert = document.getElementById('med_alert');
+        // Array of patient names that have received medication
+        let med_given = localStorage.getItem("medi_alert")? JSON.parse(localStorage.getItem("medi_alert")): [];
+        let current_patient, hour;
+
+        async function mHours(name) {
+            // 2D array with names of patients and their medication times
+            let p_list = JSON.parse('{{ p_m_hrs | tojson}}');
+
+            // Clear medication alert div
+            med_alert.textContent = '';
+            btn.style.display = 'none';
+
+            var check = 0;
+            var n1, n2, n;
+            current_patient = name;
+
+            // Traverse through 2D array, extract name and hours
+            p_list.forEach(arr => {
+                var hours = [];
+                arr.forEach(item => {
+                    // Get patient's name
+                    if (!(parseInt(item))) {
+                        check++;
+                        if (check == 1) {
+                            n1 = item;
+                        } else {
+                            n2 = item;
+                            n = n1 + " " + n2;
+                            check = 0;
+                        }
+                    } else {
+                        // Get patient's medication hours
+                        hours.push(item);
+                    }
+                });
+                // If extracted name equals to selected patient name
+                // Check if there is any medication due for the current hour
+                if (name === n) {
+                    //Get current hour
+                    var now = new Date();
+                    g_hour = now.getHours();
+
+                    // If time is 12 AM getHours returs 0
+                    if (!g_hour) {
+                            g_hour = 24;
+                    }
+                    hour = g_hour;
+                    // Check if current hour is in patient's medication hours
+                    // If True, display medication reminder message
+                    if (hours.indexOf(g_hour.toString()) != -1) {
+
+                        // Remove passed hours from local storage
+                        if (med_given.indexOf(hour) == -1) {
+                            med_given.splice(0, med_given.length);
+                            localStorage.setItem("medi_alert", JSON.stringify(med_given));
+                        }
+
+                        if (med_given.indexOf(n) == -1) {
+                            // Display message
+                            if (parseInt(g_hour) == 24) {
+                                med_alert.textContent = 'Midnight Medication is DUE';
+                            } else if (parseInt(g_hour) < 12) {
+                                med_alert.textContent = g_hour + ':00 AM Medication is DUE';
+                            } else {
+                               med_alert.textContent = g_hour + ':00 PM Medication is DUE';
+                            }
+                            // Display message alert cancellation button
+                            btn.style.display = 'inline';
+                        }
+                    }
+                }
+            });
+        }
+
+
+        /*
+         * Clears medication alert message once user presses
+         * the "GOT IT!" button
+         */
+        function clearAlert() {
+            // Clear elements
+            med_alert.textContent = '';
+            btn.style.display = 'none';
+
+            // Keeps track of which patients received medication
+            // after medication alert was seen
+            if (med_given.indexOf(current_patient) == -1)
+            {
+                med_given.push(current_patient);
+                if (med_given.indexOf(hour) == -1) {
+                    med_given.push(hour);
+                }
+            }
+
+            // Store name in local storage
+            localStorage.setItem("medi_alert", JSON.stringify(med_given));
+        }
+
+
+        /*
+         * Send HTTP GET Request
+         * Returns profile of provided name
+         */
+        async function new_patient(name) {
+            monitorP(name);
+            mHours(name);
+            // Create XML object
+            var ajax = new XMLHttpRequest();
+
+            // If GET Request is successfull, display response in selected HTML Tag
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    document.getElementById("profile_aj").innerHTML = this.responseText;
+                }
+            };
+
+            // Ensures page displays profile of selected name
+            // Ensures page refresh does not reset selected name
+            var s = document.querySelector('#profile');
+            s.value = name;
+
+            // Send GET Request
+            ajax.open('GET', '/profile/' + name, true);
+            ajax.send();
+        }
+
+
+        /*
+         * Send HTTP GET Request
+         * Returns medication hours of provided name
+         */
+        async function patient_medication(name) {
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    document.getElementById("patient_medication").innerHTML = this.responseText;
+                }
+            };
+
+            ajax.open('GET', '/patient_medication/' + name, true);
+            ajax.send();
+        }
+
+
+        /*
+         * Send HTTP GET Request
+         * Returns Feeding information of provided name
+         */
+        async function patient_feeding(name) {
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    document.getElementById("patient_feeding").innerHTML = this.responseText;
+                }
+            };
+
+            ajax.open('GET', '/patient_feeding/' + name, true);
+            ajax.send();
+        }
+
+
+        /*
+         * Send HTTP GET Request
+         * Periodic monitoring on patients
+         * Requires users to fill in required fields for a given hour
+         */
+        function progress(name) {
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    document.getElementById("progress").innerHTML = this.responseText;
+                }
+            };
+
+            ajax.open('GET', '/progress/' + name, true);
+            ajax.send();
+        }
+
+
+        /*
+         * Shift Timer
+         * Starts 8 hour countdown once user is logged in
+         */
+        Date.prototype.addHours = function(h) {
+            this.setTime(this.getTime() + (h*60*60*1000));
+            return this;
+        };
+
+        // Add 8 hours to current time
+        // Add time to local storage to avoid count down restart on page refresh
+        var countDownMax =  localStorage.getItem("deadline")? localStorage.getItem("deadline"): new Date().addHours(8);
+
+        // Update count down every 1 second
+        var count_down_timer = setInterval(function(){
+
+            // Set and retrieve local storage key
+            localStorage.setItem('deadline', countDownMax);
+            var timeLeft = new Date(localStorage.getItem("deadline"));
+
+            var now = new Date().getTime();
+            var difference = timeLeft - now;
+
+            // Calculations for hours, minutes and seconds
+            var hrs = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var min = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            var sec = Math.floor((difference % (1000 * 60)) / 1000);
+
+            // Output count down time
+            document.getElementById("timer").innerHTML = hrs + "h "
+            + min + "m " + sec + "s ";
+
+            // End of shift message
+            if (difference < 0) {
+                clearInterval(count_down_timer);
+                document.getElementById("timer").innerHTML = "** End of Shift **";
+                localStorage.clear();
+                location.reload();
+            }
+        }, 1000);
+
+    </script>
+{% endblock %}

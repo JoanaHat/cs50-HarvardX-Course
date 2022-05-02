@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block nav2 %}
+    <ul class="navbar-nav ml-auto mt-2">
+        <li class="nav-item"><a href="/register">Register</a></li>
+        <li class="nav-item"><a class="current-lk" href="/login">Log In</a></li>
+    </ul>
+{% endblock %}
+
+{% block main %}
+    <div class="welcome-lg">
+        <h4>Welcome Back.</h4>
+        <span>Log in to your account</span>
+    </div>
+    <form action="/login" method="post" id="form-lg">
+        <!-- Start of shift field -->
+        <div>
+            <div class="lable-div">
+                <lable >Start of Shift</lable>
+            </div>
+            <div class="input-div">
+                <input autocomplete="off" autofocus name="shift_start" placeholder="7AM" type="text"
+                    aria-required="true" pattern="(^0?[1-9][aApP][mM]$)|(^1[0-2][aApP][mM]$)" required="required"
+                    size="5" spellcheck="false">
+            </div>
+        </div>
+        <!-- Start of end field -->
+        <div>
+            <div class="lable-div">
+                <lable>End of Shift</lable>
+            </div>
+            <div class="input-div">
+                <input autocomplete="off" name="shift_end" placeholder="3PM" type="text"
+                    aria-required="true" pattern="(^0?[1-9][aApP][mM]$)|(^1[0-2][aApP][mM]$)" required="required"
+                    size="5" spellcheck="false">
+            </div>
+        </div>
+        <!-- Number of Patients field -->
+        <div>
+            <div class="lable-div">
+                <lable>Number of Patients under you</lable>
+            </div>
+            <div class="input-div">
+                <input autocomplete="off" min="2" name="patients" placeholder="min 2" type="number"
+                    aria-required="true" pattern="([2-6])" required="required"
+                    size="2" spellcheck="false">
+            </div>
+        </div>
+        <!-- Username field -->
+        <div>
+            <div class="lable-div">
+                <lable>Username <small>(Letters and numbers only)</small></lable>
+            </div>
+            <div class="input-div">
+                <input autocomplete="off" name="username" type="text"
+                    aria-required="true" pattern="^([- \w\d\u00c0-\u024f]+)$" required="required"
+                    size="30" spellcheck="false">
+            </div>
+        </div>
+        <!-- Password field -->
+        <div>
+            <div class="lable-div">
+                <lable>Password</lable>
+                <!-- Display password select button -->
+                <small class="display-pw">
+                    <input type="checkbox" tabindex="-1" onclick="showPassw()">
+                    <span>Show Password</span>
+                </small>
+            </div>
+            <div class="input-div">
+                <input name="password" type="password" id="passw-Input" aria-required="true"
+                    minlength="8" required="required" >
+            </div>
+        </div>
+        <!-- Sign Up link -->
+        <div class="lg-registr-div">
+            <!--Error Message placeholder -->
+            <p id='error'></p>
+            <span>Don't have an account?</span>
+            <a tabindex="-1" href="/register">Sign up</a>
+        </div>
+        <!-- Submit button -->
+        <button class="btn btn-light" id="lg-btn" type="submit">Log In</button>
+    </form>
+    <script>
+
+
+        /*
+         * Display plain text password in password field
+         */
+        function showPassw() {
+            var x = document.getElementById("passw-Input");
+            if (x.type === "password") {
+            x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+
+        /*
+         * Display input field Error message
+         */
+        function clear() {
+            // Set time duration for error message display
+            var tID = setTimeout(function () {
+                document.getElementById('error').innerHTML = "";
+                window.clearTimeout(tID);
+            }, 20000);
+        }
+
+        // Convert message from python format to json
+        var msg = JSON.parse('{{ message | tojson}}');
+        // If error message present display error to user
+        if (msg){
+            document.getElementById('error').innerHTML = msg;
+            // Clear error message
+            clear();
+        }
+
+    </script>
+{% endblock %}

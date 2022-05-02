@@ -1,0 +1,36 @@
+<!-- Displays Patient medictaion hours, top right of index.html -->
+{% block medication %}
+    <div class="patient_medication">
+        <!-- Headings -->
+        <div class="lb-color-2">MEDICATION HOURS</div>
+        <table class="table table-bordered" id="med_table">
+            <thead>
+                <tr>
+                    <th class="lb-color">Time</th>
+                    <th class="lb-color">Medication</th>
+                </tr>
+            </thead>
+            <!-- For loop -->
+            {% for key, value in p_med.items() %}
+            <tbody>
+                <tr>
+                    <!-- Hours -->
+                    <th class="m-lable">
+                        {% if key in range(11) %}
+                            {{key}}:00 AM
+                        {% else %}
+                            {{key}}:00 PM
+                        {% endif %}
+                    </th>
+                    <!-- Medication -->
+                    <td class="m-fonts" style="line-height: 1.2;">
+                        {% for med in value %}
+                            {{med}}<br>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
